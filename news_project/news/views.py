@@ -7,7 +7,7 @@ def index(request):
     if request.method == "POST":
         keyword = request.POST.get("keyword")
         if keyword:
-            api_key = "give the api "  # Replace with your actual API key
+            api_key = "API KEY "  # Replace with your actual API key
             url = f"https://newsapi.org/v2/everything?q={keyword}&apiKey={api_key}"
             response = requests.get(url)
             data = response.json()
