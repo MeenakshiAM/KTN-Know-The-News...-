@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-form input, .search-form button {
+            padding: 10px;
+            margin-right: 5px;
+        }
+        .article {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>News Search</h1>
+    <form method="POST" class="search-form">
+        {% csrf_token %}
+        <input type="text" name="keyword" placeholder="Enter keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Results:</h2>
+    {% if articles %}
+        {% for article in articles %}
+            <div class="article">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+                <a href="{{ article.url }}" target="_blank">Read more</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No articles found. Try searching for a different keyword.</p>
+    {% endif %}
+</body>
+</html>
