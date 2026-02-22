@@ -104,3 +104,29 @@ h2 {
 	text-decoration: none;
 	font-weight: bold;
 }
+
+@media (min-width: 600px) {
+	.search-form {
+		flex-direction: row;
+	}
+
+	.search-form input {
+		flex: 1;
+	}
+
+	.search-form button {
+		width: auto;
+		padding: 12px 30px;
+	}
+}
+
+@media (max-width: 480px) {
+	.task_adder {
+		margin: 20px;
+	}
+
+	nav {
+		flex-direction: column;
+		gap: 10px;
+	}
+}
