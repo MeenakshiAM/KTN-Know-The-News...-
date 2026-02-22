@@ -1,105 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Search</title>
-    <style>
-        
-        nav{
-    background-color: brown;
-    padding: 15px;
-}
-nav a{
-  
-   text-decoration: none;
-   color: whitesmoke;
-   text-align: center;
-    padding: 28px 16px;
-}
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .search-form {
-            margin-bottom: 20px;
-        }
-        .search-form input, .search-form button {
-            padding: 10px;
-            margin-right: 5px;
-        }
-        .article {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-        }
-        .task_adder{
-        margin: auto;
-        margin-top: 55px;
-        margin-left: 25%;
-        padding-left: 20px;
-        margin-right: 350px;
-        border: 1px solid black;
-        border-radius: 20px;
-    }
-    .task_adder div{
-        padding-top:7px;
-        padding-bottom: 7.5px;
-        padding-left: 20px;
-    }
-     button{
-        margin-left: 400px;
-        color: rgb(124, 20, 39);
-        background-color: rgb(255, 255, 255);
-        border-radius: 30px;
-        padding: 5px 18px;
-    }
-    .task_adder #task_name{
-        border-radius: 20px;
-        height: 20px;
-        width: 450px;
 
-    }
-    .added li{
-    margin: auto;
-    margin-top: 55px;
-    margin-left: 25%;
-    margin-right: 350px;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding-top:7px;
-    padding-bottom: 7.5px;
-    padding-left: 20px;
-}
-    </style>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>News Search</title>
+	<link rel="stylesheet" href="{% static 'news/style.css' %}">
 </head>
+
 <body>
-    <nav>
-        <a href="#"> NEWS APP</a>
-        <a href="#">home</a>
-        
-    </nav>
-    <div class="task_adder">
-    <h1>News Search</h1>
-    <form method="POST" class="search-form">
-        {% csrf_token %}
-        <input type="text" name="keyword" placeholder="Enter keyword" required>
-        <button type="submit">Search</button>
-    </form>
-</div>
-    <h2>Results:</h2>
-    {% if articles %}
-        {% for article in articles %}
-        <div class="added">
-            <li class="article">
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                <a href="{{ article.url }}" target="_blank">Read more</a>
-            </li>
-        </div>
-        {% endfor %}
-    {% else %}
-        <p>No articles found. Try searching for a different keyword.</p>
-    {% endif %}
+	<nav>
+		<a href="#"> NEWS APP</a>
+		<a href="#">home</a>
+
+	</nav>
+	<div class="task_adder">
+		<h1>News Search</h1>
+		<form method="POST" class="search-form">
+			{% csrf_token %}
+			<input type="text" name="keyword" placeholder="Enter keyword" required>
+			<button type="submit">Search</button>
+		</form>
+	</div>
+	<h2>Results:</h2>
+	{% if articles %}
+	{% for article in articles %}
+	<div class="added">
+		<li class="article">
+			<h3>{{ article.title }}</h3>
+			<p>{{ article.description }}</p>
+			<a href="{{ article.url }}" target="_blank">Read more</a>
+		</li>
+	</div>
+	{% endfor %}
+	{% else %}
+	<p>No articles found. Try searching for a different keyword.</p>
+	{% endif %}
 </body>
+
 </html>
