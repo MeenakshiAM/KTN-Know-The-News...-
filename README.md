@@ -3,7 +3,7 @@
 
 A Django-based web application that lets users search and browse news articles by keyword.
 
----
+🌐 **Live Demo**: [https://ktn-know-the-news.onrender.com](https://ktn-know-the-news.onrender.com)
 
 ## 🚀 Features
 
@@ -128,4 +128,5 @@ venv\Scripts\activate     # Windows
 > Only work on issues you have been assigned to.
 
 ---
+
 
