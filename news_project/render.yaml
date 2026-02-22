@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: ktn-know-the-news
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn news_project.wsgi:application
+    
