@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTN - Know The News</title>
+    <link rel="stylesheet" href="{% static 'news/style.css' %}">
+</head>
+
+<body>
+    <nav>
+        <div>
+            <a href="/">Home</a>
+            <a href="/search/">Search</a>
+            <a href="/india/">India News</a>
+        </div>
+    </nav>
+
+<div class="task_adder">
+    <h1>KTN - Know The News</h1>
+    <p>Stay updated. Search smarter. Know everything.</p>
+
+    <form method="POST" action="/search/" class="search-form">
+        {% csrf_token %}
+        <input type="text" name="keyword" placeholder="Search news...">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<h2>Trending News</h2>
+
+<ul class="added">
+    {% for article in articles %}
+    <li class="article">
+        <h3>{{ article.title }}</h3>
+
+        <!-- VERY IMPORTANT -->
+        <div>{{ article.description|safe }}</div>
+
+        <a href="{{ article.url }}" target="_blank">Read more</a>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+
+</html>

@@ -3,6 +3,15 @@ import requests
 import xml.etree.ElementTree as ET
 from django.conf import settings
 
+
+def home(request):
+    # Fetch trending news (reuse TOI RSS)
+    articles = fetch_toi_news()[:6]  # limit to 6 for homepage
+
+    return render(request, "news/home.html", {
+        "articles": articles
+    })
+
 def fetch_toi_news():
     url = "https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms"
     try:
@@ -32,9 +41,11 @@ def index(request):
 
     if request.method == "POST":
         keyword = request.POST.get("keyword")
+        print("KEYWORD:", keyword)   
 
         if keyword:
             api_key = settings.NEWS_API_KEY
+            print("API KEY:", api_key) 
 
             # Handle missing API key
             if not api_key:
@@ -43,8 +54,9 @@ def index(request):
                 url = f"https://newsapi.org/v2/everything?q={keyword}&apiKey={api_key}"
                 response = requests.get(url)
                 data = response.json()
+                print(data)
                 articles = data.get("articles", [])
-
+                
     return render(request, "news/index.html", {
         "articles": articles,
         "error": error
