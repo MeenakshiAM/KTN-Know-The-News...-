@@ -6,6 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>India News - Times of India</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'news/style.css' %}">
 </head>
 
@@ -20,15 +23,15 @@
 	</div>
 	<h2>Results:</h2>
 	{% if articles %}
+	<ul class="added">
 	{% for article in articles %}
-	<div class="added">
 		<li class="article">
 			<h3>{{ article.title }}</h3>
 			<p>{{ article.description|safe }}</p>
-			<a href="{{ article.url }}" target="_blank">Read more</a>
+			<a href="{{ article.url }}" target="_blank">Read more <span>&rarr;</span></a>
 		</li>
-	</div>
 	{% endfor %}
+	</ul>
 	{% else %}
 	<p>No India news found at the moment.</p>
 	{% endif %}
