@@ -21,9 +21,14 @@ def fetch_toi_news():
         
         articles = []
         for item in root.findall(".//item"):
-            title = item.find("title").text if item.find("title") is not None else "No Title"
-            description = item.find("description").text if item.find("description") is not None else ""
-            link = item.find("link").text if item.find("link") is not None else "#"
+            title_node = item.find("title")
+            desc_node = item.find("description")
+            link_node = item.find("link")
+            
+            # Check if node exists AND if it actually contains text
+            title = title_node.text if title_node is not None and title_node.text else "No Title"
+            description = desc_node.text if desc_node is not None and desc_node.text else ""
+            link = link_node.text if link_node is not None and link_node.text else "#"
                         
             articles.append({
                 "title": title,
