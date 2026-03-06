@@ -52,10 +52,15 @@ def index(request):
                 error = "API key not configured. Please set NEWS_API_KEY in .env file."
             else:
                 url = f"https://newsapi.org/v2/everything?q={keyword}&apiKey={api_key}"
-                response = requests.get(url)
-                data = response.json()
-                print(data)
-                articles = data.get("articles", [])
+                try:
+                    # Add timeout to prevent hanging
+                    response = requests.get(url, timeout=10) 
+                    response.raise_for_status() # Check for HTTP errors
+                    data = response.json()
+                    articles = data.get("articles", [])
+                except requests.exceptions.RequestException as e:
+                    print(f"News API Error: {e}")
+                    error = "Failed to fetch news due to a network error. Please try again later."
                 
     return render(request, "news/index.html", {
         "articles": articles,

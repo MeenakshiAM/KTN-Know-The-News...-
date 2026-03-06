@@ -26,6 +26,9 @@
 			<button type="submit">Search</button>
 		</form>
 	</div>
+	{% if error %}
+	<p style="color: red; text-align: center;">{{ error }}</p>
+	{% endif %}
 	<h2>Results:</h2>
 	{% if articles %}
 	<ul class="added">
